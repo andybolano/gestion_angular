@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestión Ahora</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/styles/custom.css">
+  <link rel="stylesheet" href="assets/styles/animate.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  </script>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="assets/js/wow.js"></script>
+</head>
+
+<body ng-app="app">
+  <section ng-controller="MainController as vm" ng-init="vm.get();">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+      <div class="logo"></div>
+      <h5 class="my-0 mr-md-auto font-weight-normal title-head">Gestión Ahora</h5>
+    </div>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center animated fadeIn">
+      <h1 class="display-4">{{vm.page.title}}</h1>
+      <p class="lead" ng-bind-html="vm.page.description"></p>
+    </div>
+    <div class="container">
+      <div class="card-deck text-center">
+        <div class="card mb-3  wow animated fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s">
+          <div class="card-header">
+            <h4 class="my-0">Inscripción</h4>
+          </div>
+          <div class="card-sub-header">
+            <h5 class="my-0 font-weight-normal">$ <span class="counter">350.000</span></h5>
+          </div>
+          <div class="card-body">
+
+          </div>
+        </div>
+        <div class="card mb-3 wow animated fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+          ng-repeat="item in vm.planes">
+          <div class="card-header">
+            <h4 class="my-0">{{item.title}}</h4>
+          </div>
+          <div class="card-sub-header">
+            <h5 class="my-0">1 plataforma</h5>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{item.price_1 | currency:undefined:0}} <small
+                class="text-muted">/
+                mes</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4 text-left">
+              <li>Usuarios <span class="badge badge-primary">{{item.users}}</span></li>
+              <li>Facturas <span class="badge badge-primary">{{item.facture}}</span></li>
+              <li>Almacenamiento<span class="badge badge-primary">{{item.storage}} GB</span></li>
+            </ul>
+          </div>
+          <div class="card-sub-header">
+            <h5 class="my-0">2 plataformas</h5>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{item.price_2 | currency:undefined:0}} <small
+                class="text-muted">/ mes</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Anual {{item.discount}}% de descuento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </section>
+  <div class="spacer-70"></div>
+  <section ng-controller="ContactController as vm">
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center wow animated fadeIn">
+      <h1 class="display-4">{{vm.page.title}}</h1>
+      <p class="lead" ng-bind-html="vm.page.description"></p>
+    </div>
+    <div class="container">
+      <form class="form-contact mx-auto d-block wow animated fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Nombres:</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Andy bolaño"
+            ng-model="vm.message.name" required>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Telefono:</label>
+          <input type="number" class="form-control" id="formGroupExampleInput2" placeholder="+57 3106440539"
+            ng-model="vm.message.phone" required>
+        </div>
+
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Correo:</label>
+          <input type="email" class="form-control" id="formGroupExampleInput2" placeholder="me@gmail.com"
+            ng-model="vm.message.email" required>
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Mensaje:</label>
+          <textarea class="form-control" id="formGroupExampleInput2" placeholder="Mi mensaje..."
+            ng-model="vm.message.message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary float-right" ng-click="vm.send();">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+  <div class="spacer-70"></div>
+
+  <script src="assets/js/lib/angular/angular.min.js"></script>
+  <script src="assets/js/lib/angular/ui-utils.min.js"></script>
+  <script src="assets/js/lib/angular/sanitize.js"></script>
+  <script src="assets/js/lib/angular/app.js"></script>
+  <script>
+    wow = new WOW({
+      boxClass: 'wow', // default
+      animateClass: 'animated', // default
+      offset: 0, // default
+      mobile: true, // default
+      live: true // default
+    })
+    wow.init();
+  </script>
+</body>
+
+</html>
