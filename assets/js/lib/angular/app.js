@@ -1,17 +1,15 @@
 var app = angular.module("app", ['ngSanitize']);
-app.constant('API_URL', 'http://localhost/');
 
+app.constant('API_URL', 'http://localhost/');
 
 app.controller("MainController", ['appService', '$scope', function (appService, $scope) {
     var vm = this;
     vm.planes = [];
+
     vm.page = {
         "title": "Planes",
         "description": "En <b>Gestión Ahora</b> tenemos planes que se adaptan a tus necesidades, adquiere Ahora el que mas se ajuste a las necesidades y lleva tu negocio al mas alto nivel."
     }
-
-
-
 
     vm.get = function () {
         vm.planes.push({
@@ -55,7 +53,8 @@ app.controller("MainController", ['appService', '$scope', function (appService, 
                 console.log("Ha ocurrido un problema!");
             }
         });
-    }
+    };
+
 }]);
 
 app.controller("ContactController", ['appService', '$scope', function (appService, $scope) {
@@ -64,18 +63,17 @@ app.controller("ContactController", ['appService', '$scope', function (appServic
     vm.page = {
         "title": "Contactános",
         "description": "En <b>Gestión Ahora</b> si respondemos tus mensajes"
-    }
+    };
 
     vm.message = {
         "name": "",
         "phone": "",
         "email": "",
         "message": ""
-    }
-
+    };
 
     vm.send = function () {
-        console.log(vm.message)
+
         if (vm.message.name == "" || vm.message.phone == "" || vm.message.email == "" || vm.message.message == "") {
             return;
         }
@@ -104,11 +102,11 @@ app.controller("ContactController", ['appService', '$scope', function (appServic
                 console.log("Ha ocurrido un problema!");
             }
         });
-    }
+    };
+
 }]);
 
 (function () {
-
     angular
         .module('app')
         .service('appService', ['$http', '$q', 'API_URL', appService]);
